@@ -13,13 +13,21 @@ var JAPANESE_NUMERAL_CHARS = {
   '九': 9
 };
 
+var EXPONENTS = {
+  '十': 1,
+  '百': 2,
+  '千': 3
+};
+
 module.exports = function japaneseNumeralsToNumber (stringOfJapaneseNumerals) {
   var chars = stringOfJapaneseNumerals.split('');
-  var nums = chars.map(function (c) {
-    return JAPANESE_NUMERAL_CHARS[c];
-  });
-  nums.reverse();
-  return nums.reduce(function (prev, next, idx) {
-    return prev + (next * Math.pow(10, idx));
-  }, 0);
+  chars.reverse();
+  return chars.reduce(function (prev, char) {
+    if (EXPONENTS[char]) {
+      return {value: prev.value, exp: EXPONENTS[char]};
+    }
+    var num = JAPANESE_NUMERAL_CHARS[char];
+    var sum = prev.value + (num * Math.pow(10, prev.exp));
+    return {value: sum, exp: prev.exp + 1};
+  }, {value: 0, exp: 0}).value;
 };
