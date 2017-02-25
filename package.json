@@ -1,0 +1,31 @@
+{
+  "name": "japanese-numerals-to-number",
+  "description": "convert Japanese Numerals into number",
+  "version": "0.0.0",
+  "devDependencies": {
+    "intelli-espower-loader": "^1.0.1",
+    "mocha": "^3.2.0",
+    "power-assert": "^1.4.2",
+    "semistandard": "^9.2.1",
+    "snazzy": "^6.0.0"
+  },
+  "keywords": [
+    "japanese",
+    "numeral",
+    "kansuji",
+    "number"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "fmt": "semistandard --fix",
+    "lint": "semistandard --verbose | snazzy",
+    "test": "mocha test --require intelli-espower-loader"
+  },
+  "semistandard": {
+    "globals": [
+      "describe",
+      "it"
+    ]
+  }
+}
