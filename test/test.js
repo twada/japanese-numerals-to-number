@@ -29,4 +29,9 @@ describe('japanese-numerals-to-number', function () {
     testConv({ input: '三百二', expected: 302 });
     testConv({ input: '四千五百', expected: 4500 });
   });
+  describe('if numerals starts with 十,百,千, treat them as 一十,一百,一千', function () {
+    testConv({ input: '十五', expected: 15 });
+    testConv({ input: '百八', expected: 108 });
+    testConv({ input: '千六', expected: 1006 });
+  });
 });

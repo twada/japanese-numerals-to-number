@@ -22,12 +22,17 @@ var EXPONENTS = {
 module.exports = function japaneseNumeralsToNumber (stringOfJapaneseNumerals) {
   var chars = stringOfJapaneseNumerals.split('');
   chars.reverse();
-  return chars.reduce(function (prev, char) {
+  var acc = chars.reduce(function (prev, char) {
     if (EXPONENTS[char]) {
-      return {value: prev.value, exp: EXPONENTS[char]};
+      return {value: prev.value, exp: EXPONENTS[char], last: char};
     }
     var num = JAPANESE_NUMERAL_CHARS[char];
     var sum = prev.value + (num * Math.pow(10, prev.exp));
-    return {value: sum, exp: prev.exp + 1};
-  }, {value: 0, exp: 0}).value;
+    return {value: sum, exp: prev.exp + 1, last: char};
+  }, {value: 0, exp: 0, last: null});
+  if (EXPONENTS[acc.last]) {
+    return acc.value + (1 * Math.pow(10, EXPONENTS[acc.last]));
+  } else {
+    return acc.value;
+  }
 };
