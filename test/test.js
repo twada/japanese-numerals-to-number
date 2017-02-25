@@ -4,13 +4,21 @@ delete require.cache[require.resolve('..')];
 var japaneseNumeralsToNumber = require('..');
 var assert = require('assert');
 
-describe('japanese-numerals-to-number', function () {
-  it('one digit', function () {
-    assert(japaneseNumeralsToNumber('一') === 1);
-    assert(japaneseNumeralsToNumber('二') === 2);
+function testConv (spec) {
+  var input = spec.input;
+  var expected = spec.expected;
+  it('input: ' + input + ', expected: ' + expected, function () {
+    assert(japaneseNumeralsToNumber(input) === expected);
   });
-  it('two digits', function () {
-    assert(japaneseNumeralsToNumber('三〇') === 30);
-    assert(japaneseNumeralsToNumber('六八') === 68);
+}
+
+describe('japanese-numerals-to-number', function () {
+  describe('one digit', function () {
+    testConv({ input: '一', expected: 1 });
+    testConv({ input: '二', expected: 2 });
+  });
+  describe('two digits', function () {
+    testConv({ input: '三〇', expected: 30 });
+    testConv({ input: '六八', expected: 68 });
   });
 });
