@@ -19,20 +19,23 @@ var EXPONENTS = {
   '千': 3
 };
 
+function lastValueOf (prev) {
+  if (EXPONENTS[prev.char]) {
+    return prev.value + (1 * Math.pow(10, EXPONENTS[prev.char]));
+  } else {
+    return prev.value;
+  }
+}
+
 module.exports = function japaneseNumeralsToNumber (stringOfJapaneseNumerals) {
   var chars = stringOfJapaneseNumerals.split('');
   chars.reverse();
-  var acc = chars.reduce(function (prev, char) {
+  return lastValueOf(chars.reduce(function (prev, char) {
     if (EXPONENTS[char]) {
-      return {value: prev.value, exp: EXPONENTS[char], last: char};
+      return {value: lastValueOf(prev), exp: EXPONENTS[char], char: char};
     }
     var num = JAPANESE_NUMERAL_CHARS[char];
     var sum = prev.value + (num * Math.pow(10, prev.exp));
-    return {value: sum, exp: prev.exp + 1, last: char};
-  }, {value: 0, exp: 0, last: null});
-  if (EXPONENTS[acc.last]) {
-    return acc.value + (1 * Math.pow(10, EXPONENTS[acc.last]));
-  } else {
-    return acc.value;
-  }
+    return {value: sum, exp: prev.exp + 1, char: char};
+  }, {value: 0, exp: 0, char: null}));
 };

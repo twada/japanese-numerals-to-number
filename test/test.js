@@ -33,5 +33,7 @@ describe('japanese-numerals-to-number', function () {
     testConv({ input: '十五', expected: 15 });
     testConv({ input: '百八', expected: 108 });
     testConv({ input: '千六', expected: 1006 });
+    testConv({ input: '千十', expected: 1010 });
+    testConv({ input: '千百十', expected: 1110 });
   });
 });
