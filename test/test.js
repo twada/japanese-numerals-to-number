@@ -36,4 +36,11 @@ describe('japanese-numerals-to-number', function () {
     testConv({ input: '千十', expected: 1010 });
     testConv({ input: '千百十', expected: 1110 });
   });
+  describe('万,億,兆', function () {
+    testConv({ input: '百万', expected: 1000000 });
+    testConv({ input: '一万五千八百', expected: 15800 });
+    testConv({ input: '二億五千万', expected: 250000000 });
+    testConv({ input: '十兆百億七百万', expected: 10010007000000 });
+    testConv({ input: '百兆三', expected: 100000000000003 });
+  });
 });
