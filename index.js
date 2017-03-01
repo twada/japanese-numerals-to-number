@@ -10,13 +10,17 @@ var JAPANESE_NUMERAL_CHARS = {
   '六': 6,
   '七': 7,
   '八': 8,
-  '九': 9
+  '九': 9,
+  '壱': 1,
+  '弐': 2,
+  '参': 3
 };
 
 var EXPONENTS_IN_SUBSEQ = {
   '十': 1,
   '百': 2,
-  '千': 3
+  '千': 3,
+  '拾': 1
 };
 
 var MYRIADS = {
