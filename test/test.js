@@ -43,4 +43,8 @@ describe('japanese-numerals-to-number', function () {
     testConv({ input: '十兆百億七百万', expected: 10010007000000 });
     testConv({ input: '百兆三', expected: 100000000000003 });
   });
+  describe('Number.MAX_SAFE_INTEGER => 9007199254740991', function () {
+    testConv({ input: '九千七兆千九百九十二億五千四百七十四万九百九十一', expected: Number.MAX_SAFE_INTEGER });
+    testConv({ input: '九〇〇七兆一九九二億五四七四万九九一', expected: Number.MAX_SAFE_INTEGER });
+  });
 });
