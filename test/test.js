@@ -48,4 +48,11 @@ describe('japanese-numerals-to-number', function () {
     testConv({ input: '九千七兆千九百九十二億五千四百七十四万九百九十一', expected: Number.MAX_SAFE_INTEGER });
     testConv({ input: '九〇〇七兆一九九二億五四七四万九九一', expected: Number.MAX_SAFE_INTEGER });
   });
+  describe('exceptional cases', function () {
+    it('throws TypeError when input is not a string', function () {
+      assert.throws(function () {
+        japaneseNumeralsToNumber(null);
+      }, TypeError);
+    });
+  });
 });

@@ -64,6 +64,9 @@ function charsToNumber (chars) {
   }, {value: 0, exp: 0, seq: []}));
 }
 
-module.exports = function japaneseNumeralsToNumber (stringOfJapaneseNumerals) {
-  return charsToNumber(stringOfJapaneseNumerals.split(''));
+module.exports = function japaneseNumeralsToNumber (japaneseNumerals) {
+  if (typeof japaneseNumerals !== 'string') {
+    throw new TypeError('japaneseNumerals argument must be a string');
+  }
+  return charsToNumber(japaneseNumerals.split(''));
 };
