@@ -59,5 +59,10 @@ describe('japanese-numerals-to-number', function () {
         japaneseNumeralsToNumber('第百十六回');
       }, Error);
     });
+    it('throws Error when input string is empty', function () {
+      assert.throws(function () {
+        japaneseNumeralsToNumber('');
+      }, Error);
+    });
   });
 });
