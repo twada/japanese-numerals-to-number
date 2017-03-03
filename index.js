@@ -64,9 +64,19 @@ function charsToNumber (chars) {
   }, {value: 0, exp: 0, seq: []}));
 }
 
+function supportedCharacters () {
+  return Object.keys(JAPANESE_NUMERAL_CHARS)
+    .concat(Object.keys(EXPONENTS_IN_SUBSEQ))
+    .concat(Object.keys(MYRIADS));
+}
+
 module.exports = function japaneseNumeralsToNumber (japaneseNumerals) {
   if (typeof japaneseNumerals !== 'string') {
     throw new TypeError('japaneseNumerals argument must be a string');
+  }
+  var pattern = new RegExp('^[' + supportedCharacters().join('') + ']+$');
+  if (!pattern.test(japaneseNumerals)) {
+    throw new Error('japaneseNumerals argument does not match ' + pattern);
   }
   return charsToNumber(japaneseNumerals.split(''));
 };

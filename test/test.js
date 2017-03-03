@@ -54,5 +54,10 @@ describe('japanese-numerals-to-number', function () {
         japaneseNumeralsToNumber(null);
       }, TypeError);
     });
+    it('throws Error when input contains unsupported characters', function () {
+      assert.throws(function () {
+        japaneseNumeralsToNumber('第百十六回');
+      }, Error);
+    });
   });
 });
