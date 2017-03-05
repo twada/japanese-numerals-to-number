@@ -51,18 +51,18 @@ function subseqToNumbers (subseq) {
   }, {values: [], exp: 0, char: null}));
 }
 
-function sumUp (acc) {
+function carryUpAndConcatSubseq (acc) {
   var numseq = subseqToNumbers(acc.seq).map(function (n) { return n * Math.pow(10, acc.exp); });
-  return acc.value + numseq.reduce(function (p, n) { return p + n; }, 0);
+  return acc.values.concat(numseq);
 }
 
-function charsToNumber (chars) {
-  return sumUp(chars.reverse().reduce(function (prev, char) {
+function charsToNumbers (chars) {
+  return carryUpAndConcatSubseq(chars.reverse().reduce(function (prev, char) {
     if (MYRIADS[char]) {
-      return {value: sumUp(prev), exp: MYRIADS[char], seq: []};
+      return {values: carryUpAndConcatSubseq(prev), exp: MYRIADS[char], seq: []};
     }
-    return {value: prev.value, exp: prev.exp, seq: [char].concat(prev.seq)};
-  }, {value: 0, exp: 0, seq: []}));
+    return {values: prev.values, exp: prev.exp, seq: [char].concat(prev.seq)};
+  }, {values: [], exp: 0, seq: []}));
 }
 
 function supportedCharacters () {
@@ -79,5 +79,6 @@ module.exports = function japaneseNumeralsToNumber (japaneseNumerals) {
   if (!pattern.test(japaneseNumerals)) {
     throw new Error('japaneseNumerals argument does not match ' + pattern);
   }
-  return charsToNumber(japaneseNumerals.split(''));
+  var numbers = charsToNumbers(japaneseNumerals.split(''));
+  return numbers.reduce(function (p, n) { return p + n; }, 0);
 };
