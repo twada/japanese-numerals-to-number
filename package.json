@@ -20,7 +20,8 @@
   "scripts": {
     "fmt": "semistandard --fix",
     "lint": "semistandard --verbose | snazzy",
-    "test": "mocha test --require intelli-espower-loader"
+    "test": "mocha test --require intelli-espower-loader",
+    "test:watch": "mocha test --require intelli-espower-loader --watch"
   },
   "semistandard": {
     "globals": [
