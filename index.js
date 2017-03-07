@@ -80,5 +80,11 @@ module.exports = function japaneseNumeralsToNumber (japaneseNumerals) {
     throw new Error('japaneseNumerals argument does not match ' + pattern);
   }
   var numbers = charsToNumbers(japaneseNumerals.split(''));
+  numbers.filter(function (n) { return n !== 0; }).reduce(function (p, n) {
+    if (p >= n) {
+      throw new Error('Wrong sequence of numerals');
+    }
+    return n;
+  });
   return numbers.reduce(function (p, n) { return p + n; }, 0);
 };

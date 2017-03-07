@@ -12,6 +12,14 @@ function testConv (spec) {
   });
 }
 
+function failCase (input) {
+  it('fail case: ' + input, function () {
+    assert.throws(function () {
+      japaneseNumeralsToNumber(input);
+    }, Error);
+  });
+}
+
 describe('japanese-numerals-to-number', function () {
   describe('positional notation', function () {
     testConv({ input: '三〇', expected: 30 });
@@ -63,6 +71,13 @@ describe('japanese-numerals-to-number', function () {
       assert.throws(function () {
         japaneseNumeralsToNumber('');
       }, Error);
+    });
+    describe('throws Error when input string is wrong sequence of numerals', function () {
+      failCase('十十');
+      failCase('二十五十');
+      failCase('十百千');
+      failCase('三十七百九千');
+      failCase('四万三億二兆');
     });
   });
 });
