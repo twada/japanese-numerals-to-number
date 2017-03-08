@@ -23,7 +23,7 @@ var EXPONENTS_IN_SUBSEQ = {
   '拾': 1
 };
 
-var MYRIADS = {
+var POWERS_OF_MYRIAD = {
   '万': 4,
   '億': 8,
   '兆': 12
@@ -53,7 +53,7 @@ function subseqToNumbers (subseq) {
 
 function carryUpAndConcatSubseq (acc) {
   if (acc.values.length > 0 && acc.seq.length === 0) {
-    throw new Error(Object.keys(MYRIADS).join(',') + ' cannot be adjacent to each other or be the first character of the sequence');
+    throw new Error(Object.keys(POWERS_OF_MYRIAD).join(',') + ' cannot be adjacent to each other or be the first character of the sequence');
   }
   var numseq = subseqToNumbers(acc.seq).map(function (n) { return n * Math.pow(10, acc.exp); });
   return acc.values.concat(numseq);
@@ -61,8 +61,8 @@ function carryUpAndConcatSubseq (acc) {
 
 function charsToNumbers (chars) {
   return carryUpAndConcatSubseq(chars.reverse().reduce(function (prev, char) {
-    if (MYRIADS[char]) {
-      return {values: carryUpAndConcatSubseq(prev), exp: MYRIADS[char], seq: []};
+    if (POWERS_OF_MYRIAD[char]) {
+      return {values: carryUpAndConcatSubseq(prev), exp: POWERS_OF_MYRIAD[char], seq: []};
     }
     return {values: prev.values, exp: prev.exp, seq: [char].concat(prev.seq)};
   }, {values: [], exp: 0, seq: []}));
@@ -71,7 +71,7 @@ function charsToNumbers (chars) {
 function supportedCharacters () {
   return Object.keys(JAPANESE_NUMERAL_CHARS)
     .concat(Object.keys(EXPONENTS_IN_SUBSEQ))
-    .concat(Object.keys(MYRIADS));
+    .concat(Object.keys(POWERS_OF_MYRIAD));
 }
 
 module.exports = function japaneseNumeralsToNumber (japaneseNumerals) {
