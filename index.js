@@ -52,6 +52,9 @@ function subseqToNumbers (subseq) {
 }
 
 function carryUpAndConcatSubseq (acc) {
+  if (acc.values.length > 0 && acc.seq.length === 0) {
+    throw new Error(Object.keys(MYRIADS).join(',') + ' cannot be adjacent to each other or be the first character of the sequence');
+  }
   var numseq = subseqToNumbers(acc.seq).map(function (n) { return n * Math.pow(10, acc.exp); });
   return acc.values.concat(numseq);
 }
