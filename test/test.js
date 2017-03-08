@@ -26,18 +26,24 @@ describe('japanese-numerals-to-number', function () {
     testConv({ input: '四千五百', expected: 4500 });
   });
   describe('if starts with 十,百,千, treat them as 一十,一百,一千', function () {
+    testConv({ input: '十', expected: 10 });
     testConv({ input: '十五', expected: 15 });
+    testConv({ input: '百', expected: 100 });
+    testConv({ input: '百十', expected: 110 });
     testConv({ input: '百八', expected: 108 });
     testConv({ input: '千六', expected: 1006 });
     testConv({ input: '千十', expected: 1010 });
     testConv({ input: '千百十', expected: 1110 });
   });
-  describe('numerals for myriads: 万,億,兆', function () {
+  describe('numerals for the name of powers of myriad: 万,億,兆', function () {
     testConv({ input: '百万', expected: 1000000 });
     testConv({ input: '一万五千八百', expected: 15800 });
     testConv({ input: '二億五千万', expected: 250000000 });
     testConv({ input: '十兆百億七百万', expected: 10010007000000 });
     testConv({ input: '百兆三', expected: 100000000000003 });
+    testConv({ input: '二千万', expected: 20000000 });
+    testConv({ input: '一千万', expected: 10000000 });
+    testConv({ input: '千万', expected: 10000000 });
   });
   describe('formal numerals called daiji: 壱,弐,参,拾', function () {
     testConv({ input: '参弐壱', expected: 321 });
