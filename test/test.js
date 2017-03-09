@@ -95,5 +95,17 @@ describe('japanese-numerals-to-number', function () {
       wrongMyriads('億千万');
       wrongMyriads('億千万億千万');
     });
+    describe('Each place (十,百,千,拾) should not have more than one digit', function () {
+      function wrongNumberOfDigitsForPlaces (input) {
+        it(input, function () {
+          assert.throws(function () {
+            japaneseNumeralsToNumber(input);
+          }, /Each place \(十,百,千,拾\) should not have more than one digit/);
+        });
+      }
+      wrongNumberOfDigitsForPlaces('六七百');
+      wrongNumberOfDigitsForPlaces('二〇〇十七');
+      wrongNumberOfDigitsForPlaces('三四千五六七百');
+    });
   });
 });
