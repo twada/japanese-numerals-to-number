@@ -30,11 +30,12 @@ var POWERS_OF_MYRIAD = {
 };
 
 function valuesOf (acc) {
-  var seqForPlace = EXPONENTS_IN_SUBSEQ[acc.char]
+  var exp = EXPONENTS_IN_SUBSEQ[acc.place];
+  var seqForPlace = (exp && acc.seq.length === 0)
     // if seq starts with 十,百,千, treat them as 一十,一百,一千
-    ? acc.seq.concat(1 * Math.pow(10, EXPONENTS_IN_SUBSEQ[acc.char]))
+    ? acc.seq.concat(1 * Math.pow(10, exp))
     : acc.seq;
-  if (EXPONENTS_IN_SUBSEQ[acc.place] && seqForPlace.length !== 1) {
+  if (exp && seqForPlace.length !== 1) {
     throw new Error('Each place (' + Object.keys(EXPONENTS_IN_SUBSEQ).join(',') + ') should not have more than one digit');
   }
   return acc.values.concat(seqForPlace);
@@ -43,16 +44,15 @@ function valuesOf (acc) {
 function subseqToNumbers (subseq) {
   return valuesOf(subseq.reverse().reduce(function (prev, char) {
     if (EXPONENTS_IN_SUBSEQ[char]) {
-      return {values: valuesOf(prev), seq: [], exp: EXPONENTS_IN_SUBSEQ[char], char: char, place: char};
+      return {values: valuesOf(prev), seq: [], exp: EXPONENTS_IN_SUBSEQ[char], place: char};
     }
     return {
       values: prev.values,
       seq: prev.seq.concat(JAPANESE_NUMERAL_CHARS[char] * Math.pow(10, prev.exp)),
       exp: prev.exp + 1,
-      char: char,
       place: prev.place
     };
-  }, {values: [], seq: [], exp: 0, char: null, place: '一'}));
+  }, {values: [], seq: [], exp: 0, place: '一'}));
 }
 
 function carryUpAndConcatSubseq (acc) {
