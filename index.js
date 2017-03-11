@@ -31,11 +31,16 @@ var POWERS_OF_MYRIAD = {
 
 function valuesOf (acc) {
   var exp = EXPONENTS_IN_SUBSEQ[acc.place];
-  var seqForPlace = (exp && acc.seq.length === 0)
-    // if seq starts with 十,百,千, treat them as 一十,一百,一千
-    ? acc.seq.concat(1 * Math.pow(10, exp))
-    : acc.seq;
-  if (exp && seqForPlace.length !== 1) {
+  if (!exp) {
+    // positional notation or place of '一'
+    if ((acc.seq.length > 0) && (acc.seq[acc.seq.length - 1] === 0)) {
+      throw new Error('Positional notation or place of "一" should not start with zero');
+    }
+    return acc.values.concat(acc.seq);
+  }
+  // if seq starts with 十,百,千, treat them as 一十,一百,一千
+  var seqForPlace = (acc.seq.length === 0) ? acc.seq.concat(1 * Math.pow(10, exp)) : acc.seq;
+  if (seqForPlace.length !== 1) {
     throw new Error('Each place (' + Object.keys(EXPONENTS_IN_SUBSEQ).join(',') + ') should not have more than one digit');
   }
   return acc.values.concat(seqForPlace);

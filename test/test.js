@@ -107,5 +107,21 @@ describe('japanese-numerals-to-number', function () {
       wrongNumberOfDigitsForPlaces('二〇〇十七');
       wrongNumberOfDigitsForPlaces('三四千五六七百');
     });
+    describe('Positional notation or place of "一" should not start with zero', function () {
+      function placesStartsWithZero (input) {
+        it(input, function () {
+          assert.throws(function () {
+            japaneseNumeralsToNumber(input);
+          }, /Positional notation or place of "一" should not start with zero/);
+        });
+      }
+      placesStartsWithZero('〇〇');
+      placesStartsWithZero('〇十〇');
+      placesStartsWithZero('〇一二三');
+      placesStartsWithZero('十〇');
+      placesStartsWithZero('千〇');
+      placesStartsWithZero('千〇〇');
+      placesStartsWithZero('〇万');
+    });
   });
 });
