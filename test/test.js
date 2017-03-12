@@ -107,6 +107,17 @@ describe('japanese-numerals-to-number', function () {
       wrongNumberOfDigitsForPlaces('二〇〇十七');
       wrongNumberOfDigitsForPlaces('三四千五六七百');
     });
+    describe('Each place (十,百,千,拾) should not start with zero', function () {
+      function placesStartsWithZero (input) {
+        it(input, function () {
+          assert.throws(function () {
+            japaneseNumeralsToNumber(input);
+          }, /Each place \(十,百,千,拾\) should not start with zero/);
+        });
+      }
+      placesStartsWithZero('〇十');
+      placesStartsWithZero('〇千〇百〇十');
+    });
     describe('Positional notation or place of "一" should not start with zero', function () {
       function placesStartsWithZero (input) {
         it(input, function () {

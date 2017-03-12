@@ -43,6 +43,9 @@ function valuesOf (acc) {
   if (seqForPlace.length !== 1) {
     throw new Error('Each place (' + Object.keys(EXPONENTS_IN_SUBSEQ).join(',') + ') should not have more than one digit');
   }
+  if (seqForPlace[0] === 0) {
+    throw new Error('Each place (' + Object.keys(EXPONENTS_IN_SUBSEQ).join(',') + ') should not start with zero');
+  }
   return acc.values.concat(seqForPlace);
 }
 
