@@ -94,7 +94,12 @@ module.exports = function japaneseNumeralsToNumber (japaneseNumerals) {
   if (!pattern.test(japaneseNumerals)) {
     throw new Error('japaneseNumerals argument does not match ' + pattern);
   }
-  var numbers = charsToNumbers(japaneseNumerals.split(''));
+  var chars = japaneseNumerals.split('');
+  if (chars.length === 1 && JAPANESE_NUMERAL_CHARS[chars[0]] === 0) {
+    // treat zero as special case
+    return 0;
+  }
+  var numbers = charsToNumbers(chars);
   numbers.filter(function (n) { return n !== 0; }).reduce(function (p, n) {
     if (p >= n) {
       throw new Error('Wrong sequence of numerals');

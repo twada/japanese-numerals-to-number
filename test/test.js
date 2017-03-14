@@ -13,6 +13,9 @@ function testConv (spec) {
 }
 
 describe('japanese-numerals-to-number', function () {
+  describe('zero', function () {
+    testConv({ input: '〇', expected: 0 });
+  });
   describe('positional notation', function () {
     testConv({ input: '三〇', expected: 30 });
     testConv({ input: '六八', expected: 68 });
