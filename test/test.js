@@ -95,6 +95,8 @@ describe('japanese-numerals-to-number', function () {
           }, /万,億,兆 cannot be adjacent to each other or be the first character of the sequence/);
         });
       }
+      wrongMyriads('万');
+      wrongMyriads('兆');
       wrongMyriads('億千万');
       wrongMyriads('億千万億千万');
     });
