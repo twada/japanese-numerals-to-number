@@ -64,8 +64,13 @@ function subseqToNumbers (subseq) {
 }
 
 function carryUpAndConcatSubseq (acc) {
-  if (acc.exp > 0 && acc.seq.length === 0) {
-    throw new Error(Object.keys(POWERS_OF_MYRIAD).join(',') + ' cannot be adjacent to each other or be the first character of the sequence');
+  if (acc.exp > 0) {
+    if (acc.seq.length === 0) {
+      throw new Error(Object.keys(POWERS_OF_MYRIAD).join(',') + ' cannot be adjacent to each other or be the first character of the sequence');
+    }
+    if (acc.seq.length === 1 && acc.seq[0] === '千') {
+      throw new Error('if "千" directly precedes the name of powers of myriad, "一" is normally attached before "千"');
+    }
   }
   var numseq = subseqToNumbers(acc.seq).map(function (n) { return n * Math.pow(10, acc.exp); });
   return acc.values.concat(numseq);

@@ -46,7 +46,6 @@ describe('japanese-numerals-to-number', function () {
     testConv({ input: '百兆三', expected: 100000000000003 });
     testConv({ input: '二千万', expected: 20000000 });
     testConv({ input: '一千万', expected: 10000000 });
-    testConv({ input: '千万', expected: 10000000 });
   });
   describe('formal numerals called daiji: 壱,弐,参,拾', function () {
     testConv({ input: '参弐壱', expected: 321 });
@@ -96,9 +95,9 @@ describe('japanese-numerals-to-number', function () {
         });
       }
       wrongMyriads('万');
+      wrongMyriads('億');
       wrongMyriads('兆');
-      wrongMyriads('億千万');
-      wrongMyriads('億千万億千万');
+      wrongMyriads('兆億万');
     });
     describe('Each place (十,百,千,拾) should not have more than one digit', function () {
       function wrongNumberOfDigitsForPlaces (input) {
@@ -138,6 +137,18 @@ describe('japanese-numerals-to-number', function () {
       placesStartsWithZero('千〇');
       placesStartsWithZero('千〇〇');
       placesStartsWithZero('〇万');
+    });
+    describe('if "千" directly precedes the name of powers of myriad, "一" is normally attached before "千"', function () {
+      function senDirectlyPrecedesTheNameOfPowersOfMyriad (input) {
+        it(input, function () {
+          assert.throws(function () {
+            japaneseNumeralsToNumber(input);
+          }, /if "千" directly precedes the name of powers of myriad, "一" is normally attached before "千"/);
+        });
+      }
+      senDirectlyPrecedesTheNameOfPowersOfMyriad('千万');
+      senDirectlyPrecedesTheNameOfPowersOfMyriad('一億千万');
+      senDirectlyPrecedesTheNameOfPowersOfMyriad('億千万');
     });
   });
 });
