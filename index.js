@@ -105,11 +105,14 @@ module.exports = function japaneseNumeralsToNumber (japaneseNumerals) {
     return 0;
   }
   var numbers = charsToNumbers(chars);
-  numbers.filter(function (n) { return n !== 0; }).reduce(function (p, n) {
+  numbers.reduce(function (p, n) {
+    if (n === 0) {
+      return p;
+    }
     if (p >= n) {
       throw new Error('Wrong sequence of numerals');
     }
     return n;
   });
-  return numbers.reduce(function (p, n) { return p + n; }, 0);
+  return numbers.reduce(function (p, n) { return p + n; });
 };
