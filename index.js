@@ -104,15 +104,13 @@ module.exports = function japaneseNumeralsToNumber (japaneseNumerals) {
     // treat zero as special case
     return 0;
   }
-  var numbers = charsToNumbers(chars);
-  numbers.reduce(function (p, n) {
+  return charsToNumbers(chars).reduce(function (acc, n) {
     if (n === 0) {
-      return p;
+      return acc;
     }
-    if (p >= n) {
+    if (acc.prev >= n) {
       throw new Error('Wrong sequence of numerals');
     }
-    return n;
-  });
-  return numbers.reduce(function (p, n) { return p + n; });
+    return { sum: acc.sum + n, prev: n };
+  }, { sum: 0, prev: 0 }).sum;
 };
