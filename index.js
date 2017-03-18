@@ -85,6 +85,22 @@ function charsToNumbers (chars) {
   }, {values: [], exp: 0, seq: []}));
 }
 
+function charsToNumber (chars) {
+  if (chars.length === 1 && JAPANESE_NUMERAL_CHARS[chars[0]] === 0) {
+    // treat zero as special case
+    return 0;
+  }
+  return charsToNumbers(chars).reduce(function (acc, n) {
+    if (n === 0) {
+      return acc;
+    }
+    if (acc.prev >= n) {
+      throw new Error('Wrong sequence of numerals');
+    }
+    return { sum: acc.sum + n, prev: n };
+  }, { sum: 0, prev: 0 }).sum;
+}
+
 function supportedCharacters () {
   return Object.keys(JAPANESE_NUMERAL_CHARS)
     .concat(Object.keys(EXPONENTS_IN_SUBSEQ))
@@ -99,18 +115,5 @@ module.exports = function japaneseNumeralsToNumber (japaneseNumerals) {
   if (!pattern.test(japaneseNumerals)) {
     throw new Error('japaneseNumerals argument does not match ' + pattern);
   }
-  var chars = japaneseNumerals.split('');
-  if (chars.length === 1 && JAPANESE_NUMERAL_CHARS[chars[0]] === 0) {
-    // treat zero as special case
-    return 0;
-  }
-  return charsToNumbers(chars).reduce(function (acc, n) {
-    if (n === 0) {
-      return acc;
-    }
-    if (acc.prev >= n) {
-      throw new Error('Wrong sequence of numerals');
-    }
-    return { sum: acc.sum + n, prev: n };
-  }, { sum: 0, prev: 0 }).sum;
+  return charsToNumber(japaneseNumerals.split(''));
 };
