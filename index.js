@@ -16,7 +16,7 @@ var JAPANESE_NUMERAL_CHARS = {
   '参': 3
 };
 
-var EXPONENTS_IN_SUBSEQ = {
+var PLACES_IN_SUBSEQ = {
   '十': 1,
   '百': 2,
   '千': 3,
@@ -30,7 +30,7 @@ var POWERS_OF_MYRIAD = {
 };
 
 function valuesOf (acc) {
-  var exp = EXPONENTS_IN_SUBSEQ[acc.place];
+  var exp = PLACES_IN_SUBSEQ[acc.place];
   if (!exp) {
     // positional notation or place of '一'
     if ((acc.seq.length > 0) && (acc.seq[acc.seq.length - 1] === 0)) {
@@ -41,18 +41,18 @@ function valuesOf (acc) {
   // if seq starts with 十,百,千, treat them as 一十,一百,一千
   var seqForPlace = (acc.seq.length === 0) ? acc.seq.concat(1 * Math.pow(10, exp)) : acc.seq;
   if (seqForPlace.length !== 1) {
-    throw new Error('Each place (' + Object.keys(EXPONENTS_IN_SUBSEQ).join(',') + ') should not have more than one digit');
+    throw new Error('Each place (' + Object.keys(PLACES_IN_SUBSEQ).join(',') + ') should not have more than one digit');
   }
   if (seqForPlace[0] === 0) {
-    throw new Error('Each place (' + Object.keys(EXPONENTS_IN_SUBSEQ).join(',') + ') should not start with zero');
+    throw new Error('Each place (' + Object.keys(PLACES_IN_SUBSEQ).join(',') + ') should not start with zero');
   }
   return acc.values.concat(seqForPlace);
 }
 
 function subseqToNumbers (subseq) {
   return valuesOf(subseq.reverse().reduce(function (prev, char) {
-    if (EXPONENTS_IN_SUBSEQ[char]) {
-      return {values: valuesOf(prev), seq: [], exp: EXPONENTS_IN_SUBSEQ[char], place: char};
+    if (PLACES_IN_SUBSEQ[char]) {
+      return {values: valuesOf(prev), seq: [], exp: PLACES_IN_SUBSEQ[char], place: char};
     }
     return {
       values: prev.values,
@@ -103,7 +103,7 @@ function charsToNumber (chars) {
 
 function supportedCharacters () {
   return Object.keys(JAPANESE_NUMERAL_CHARS)
-    .concat(Object.keys(EXPONENTS_IN_SUBSEQ))
+    .concat(Object.keys(PLACES_IN_SUBSEQ))
     .concat(Object.keys(POWERS_OF_MYRIAD));
 }
 
