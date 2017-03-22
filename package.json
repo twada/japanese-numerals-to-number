@@ -2,21 +2,39 @@
   "name": "japanese-numerals-to-number",
   "description": "convert Japanese Numerals into number",
   "version": "0.0.0",
+  "author": {
+    "name": "Takuto Wada",
+    "email": "takuto.wada@gmail.com",
+    "url": "https://github.com/twada"
+  },
+  "bugs": "https://github.com/twada/japanese-numerals-to-number/issues",
   "devDependencies": {
     "intelli-espower-loader": "^1.0.1",
     "mocha": "^3.2.0",
     "power-assert": "^1.4.2",
-    "semistandard": "^9.2.1",
+    "semistandard": "^10.0.0",
     "snazzy": "^6.0.0"
   },
+  "files": [
+    "index.js",
+    "package.json",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "homepage": "https://github.com/twada/japanese-numerals-to-number",
   "keywords": [
     "japanese",
-    "numeral",
     "kansuji",
-    "number"
+    "number",
+    "numeral"
   ],
   "license": "MIT",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/twada/japanese-numerals-to-number.git"
+  },
   "scripts": {
     "fmt": "semistandard --fix",
     "lint": "semistandard --verbose | snazzy",
