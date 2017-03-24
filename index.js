@@ -116,7 +116,15 @@ function supportedCharacters () {
     .concat(Object.keys(POWERS_OF_MYRIAD));
 }
 
-module.exports = function japaneseNumeralsToNumber (japaneseNumerals) {
+/**
+ * Converts Japanese Numerals into number.
+ *
+ * @param {string} japaneseNumerals string of Japanese Numerals
+ * @returns {number} number represented by japaneseNumerals
+ * @throws {TypeError} when `japaneseNumerals` is not a string
+ * @throws {Error} when `japaneseNumerals` is invalid
+ */
+function japaneseNumeralsToNumber (japaneseNumerals) {
   if (typeof japaneseNumerals !== 'string') {
     throw new TypeError('japaneseNumerals argument must be a string');
   }
@@ -128,4 +136,6 @@ module.exports = function japaneseNumeralsToNumber (japaneseNumerals) {
     throw new Error('japaneseNumerals argument does not match ' + pattern);
   }
   return charsToNumber(japaneseNumerals.split(''));
-};
+}
+
+module.exports = japaneseNumeralsToNumber;
