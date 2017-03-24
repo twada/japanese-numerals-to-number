@@ -1,3 +1,12 @@
+/**
+ * japanese-numerals-to-number - Converts Japanese Numerals into number.
+ *
+ * https://github.com/twada/japanese-numerals-to-number
+ *
+ * Copyright (c) 2017 Takuto Wada
+ * Licensed under the MIT license.
+ *   https://github.com/twada/japanese-numerals-to-number/blob/master/LICENSE
+ */
 'use strict';
 
 var JAPANESE_NUMERAL_CHARS = {
