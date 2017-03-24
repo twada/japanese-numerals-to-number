@@ -1,7 +1,7 @@
 japanese-numerals-to-number
 ================================
 
-Converts [japanese numerals](https://en.wikipedia.org/wiki/Japanese_numerals) into `number`.
+Converts [Japanese Numerals](https://en.wikipedia.org/wiki/Japanese_numerals) into `number`.
 
 [![Build Status][travis-image]][travis-url]
 [![NPM version][npm-image]][npm-url]
@@ -13,11 +13,18 @@ USAGE
 ---------------------------------------
 
 ```js
-var ja2num = require('japanese-numerals-to-number');
-var assert = require('assert');
+const ja2num = require('japanese-numerals-to-number');
+const assert = require('assert');
+
+assert(ja2num('〇') === 0);
 assert(ja2num('一億二千三百四十五万六千七百八十九') === 123456789);
+
 assert(ja2num('二千十七') === 2017);
 assert(ja2num('二〇一七') === 2017); // supports positional notation
+
+assert.throws(() => ja2num(null), TypeError);
+assert.throws(() => ja2num('二十三十'), Error);
+assert.throws(() => ja2num('億千万'), Error);
 ```
 
 
@@ -26,9 +33,9 @@ API
 
 ### var convertedNum = ja2num(stringOfJapaneseNumerals);
 
-- Accepts japanese numerals between `0` (that is `'〇'`) and `Number.MAX_SAFE_INTEGER` (`9007199254740991`, that is `'九千七兆千九百九十二億五千四百七十四万九百九十一'`). Any number bigger than `Number.MAX_SAFE_INTEGER` is not supported and is not accurate.
+- Supports Japanese Numerals between `0` (that is `'〇'`) and `Number.MAX_SAFE_INTEGER` (`9007199254740991`, that is `'九千七兆千九百九十二億五千四百七十四万九百九十一'`). Any number larger than `Number.MAX_SAFE_INTEGER` is not guaranteed.
 - Throws `TypeError` when argument is not a string.
-- Throws `Error` when argument is an invalid japanese numerals.
+- Throws `Error` when argument is an invalid Japanese Numerals.
 
 ### supported characters
 
