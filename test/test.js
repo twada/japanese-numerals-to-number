@@ -72,6 +72,11 @@ describe('japanese-numerals-to-number', function () {
         japaneseNumeralsToNumber('');
       }, Error);
     });
+    it('throws Error when input string is too long', function () {
+      assert.throws(function () {
+        japaneseNumeralsToNumber('一二三四五六七八九〇一二三四五六七八九〇一二三四五六七八九〇一二三');
+      }, Error);
+    });
     describe('throws Error when input string is wrong sequence of numerals', function () {
       function wrongSequence (input) {
         it(input, function () {

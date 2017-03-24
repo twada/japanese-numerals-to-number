@@ -111,6 +111,9 @@ module.exports = function japaneseNumeralsToNumber (japaneseNumerals) {
   if (typeof japaneseNumerals !== 'string') {
     throw new TypeError('japaneseNumerals argument must be a string');
   }
+  if (japaneseNumerals.length > 32) {
+    throw new Error('length of japaneseNumerals is too long');
+  }
   var pattern = new RegExp('^[' + supportedCharacters().join('') + ']+$');
   if (!pattern.test(japaneseNumerals)) {
     throw new Error('japaneseNumerals argument does not match ' + pattern);
