@@ -1,7 +1,7 @@
 {
   "name": "japanese-numerals-to-number",
   "description": "convert Japanese Numerals into number",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": {
     "name": "Takuto Wada",
     "email": "takuto.wada@gmail.com",
