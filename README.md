@@ -47,7 +47,7 @@ API
 
  - `十`, `百`, `千`, `万`, `億`, `兆`
 
-#### formal numerals (daiji) in use
+#### [formal numerals (daiji) used in legal documents](https://en.wikipedia.org/wiki/Japanese_numerals#Formal_numbers)
 
  - `壱`, `弐`, `参`, `拾`
 

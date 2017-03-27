@@ -20,6 +20,7 @@ var JAPANESE_NUMERAL_CHARS = {
   '七': 7,
   '八': 8,
   '九': 9,
+  // formal numerals (daiji) used in legal documents
   '壱': 1,
   '弐': 2,
   '参': 3
@@ -29,6 +30,7 @@ var PLACES_IN_SUBSEQ = {
   '十': 1,
   '百': 2,
   '千': 3,
+  // formal numerals (daiji) used in legal documents
   '拾': 1
 };
 
