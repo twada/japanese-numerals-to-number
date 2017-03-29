@@ -25,6 +25,9 @@ assert(ja2num('二〇一七') === 2017); // supports positional notation
 assert.throws(() => ja2num(null), TypeError);
 assert.throws(() => ja2num('二十三十'), Error);
 assert.throws(() => ja2num('億千万'), Error);
+
+assert(ja2num('壱百壱拾') === 110); // supports formal numerals (daiji) used in legal documents
+assert.throws(() => ja2num('一百一十'), Error);
 ```
 
 
