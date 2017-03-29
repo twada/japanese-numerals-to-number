@@ -65,6 +65,10 @@ function subseqToNumbers (subseq) {
     if (PLACES_IN_SUBSEQ[char]) {
       return {values: valuesOf(prev), seq: [], exp: PLACES_IN_SUBSEQ[char], place: char};
     }
+    // in some cases, the digit 1 is explicitly written like 壱百壱拾 for 110, as opposed to 百十 in common writing.
+    if (char === '一' && (prev.place === '十' || prev.place === '百')) {
+      throw new Error('"一百" and "一十" are invalid in common writing. 100 is just "百", and 10 is just "十"');
+    }
     return {
       values: prev.values,
       seq: prev.seq.concat(JAPANESE_NUMERAL_CHARS[char] * Math.pow(10, prev.exp)),
