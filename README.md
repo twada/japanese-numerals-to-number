@@ -36,7 +36,7 @@ API
 
 ### var convertedNum = ja2num(stringOfJapaneseNumerals);
 
-- Supports Japanese Numerals between `0` (that is `'〇'`) and `Number.MAX_SAFE_INTEGER` (`9007199254740991`, that is `'九千七兆千九百九十二億五千四百七十四万九百九十一'`). Any number larger than `Number.MAX_SAFE_INTEGER` is not guaranteed.
+- Supports Japanese Numerals between `0` (that is `'〇'`) and [Number.MAX_SAFE_INTEGER](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER) (`9007199254740991`, that is `'九千七兆千九百九十二億五千四百七十四万九百九十一'`). Any number larger than `Number.MAX_SAFE_INTEGER` is not guaranteed.
 - Throws `TypeError` when argument is not a string.
 - Throws `Error` when argument is an invalid Japanese Numerals.
 
