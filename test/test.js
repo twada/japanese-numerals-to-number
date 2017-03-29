@@ -52,12 +52,6 @@ describe('japanese-numerals-to-number', function () {
     testConv({ input: '弐拾参', expected: 23 });
     testConv({ input: '拾弐万参千弐百拾壱', expected: 123211 });
   });
-  it('in some cases, the digit 1 is explicitly written like 壱百壱拾 for 110, as opposed to 百十 in common writing.', function () {
-    assert(japaneseNumeralsToNumber('壱百壱拾') === 110);
-    assert.throws(function () {
-      japaneseNumeralsToNumber('一百一十');
-    }, /"一百" and "一十" are invalid in common writing\. 100 is just "百", and 10 is just "十"/);
-  });
   describe('Number.MAX_SAFE_INTEGER => 9007199254740991', function () {
     testConv({ input: '九千七兆千九百九十二億五千四百七十四万九百九十一', expected: Number.MAX_SAFE_INTEGER });
     testConv({ input: '九〇〇七兆一九九二億五四七四万九九一', expected: Number.MAX_SAFE_INTEGER });
@@ -96,6 +90,22 @@ describe('japanese-numerals-to-number', function () {
       wrongSequence('十百千');
       wrongSequence('三十七百九千');
       wrongSequence('四万三億二兆');
+    });
+    describe('"一百" and "一十" are invalid in common writing. 100 is just "百", and 10 is just "十"', function () {
+      function explicitIchi (input) {
+        it(input, function () {
+          assert.throws(function () {
+            japaneseNumeralsToNumber(input);
+          }, /"一百" and "一十" are invalid in common writing\. 100 is just "百", and 10 is just "十"/);
+        });
+      }
+      explicitIchi('一十');
+      explicitIchi('一百');
+      explicitIchi('一百一十');
+      explicitIchi('四百一十五');
+      it('in some cases, the digit 1 is explicitly written like 壱百壱拾 for 110, as opposed to 百十 in common writing.', function () {
+        assert(japaneseNumeralsToNumber('壱百壱拾') === 110);
+      });
     });
     describe('万,億,兆 cannot be adjacent to each other or be the first character of the sequence', function () {
       function wrongMyriads (input) {
