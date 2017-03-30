@@ -47,6 +47,12 @@ describe('japanese-numerals-to-number', function () {
     testConv({ input: '二千万', expected: 20000000 });
     testConv({ input: '一千万', expected: 10000000 });
   });
+  describe('if 千 sen does not directly precede the name of powers of myriad or if numbers are lower than 2,000, attaching 一 ichi is optional.', function () {
+    testConv({ input: '千五百', expected: 1500 });
+    testConv({ input: '一千五百', expected: 1500 });
+    testConv({ input: '千五百万', expected: 15000000 });
+    testConv({ input: '一千五百万', expected: 15000000 });
+  });
   describe('formal numerals called daiji: 壱,弐,参,拾', function () {
     testConv({ input: '参弐壱', expected: 321 });
     testConv({ input: '弐拾参', expected: 23 });
