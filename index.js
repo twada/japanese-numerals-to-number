@@ -61,7 +61,7 @@ function valuesOf (acc) {
 }
 
 function subseqToNumbers (subseq) {
-  return valuesOf(subseq.reverse().reduce(function (prev, char) {
+  return valuesOf(subseq.reduce(function (prev, char) {
     if (PLACES_IN_SUBSEQ[char]) {
       return {values: valuesOf(prev), seq: [], exp: PLACES_IN_SUBSEQ[char], place: char};
     }
@@ -96,7 +96,7 @@ function charsToNumbers (chars) {
     if (POWERS_OF_MYRIAD[char]) {
       return {values: carryUpAndConcatSubseq(prev), exp: POWERS_OF_MYRIAD[char], seq: []};
     }
-    return {values: prev.values, exp: prev.exp, seq: [char].concat(prev.seq)};
+    return {values: prev.values, exp: prev.exp, seq: prev.seq.concat([char])};
   }, {values: [], exp: 0, seq: []}));
 }
 
