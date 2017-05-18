@@ -1,3 +1,11 @@
+### [1.0.2](https://github.com/twada/japanese-numerals-to-number/releases/tag/v1.0.2) (2017-05-18)
+
+
+#### Bug Fixes
+
+* throw Error when 十,百,千 appears more than once in subsequence ([055d8daa](https://github.com/twada/japanese-numerals-to-number/commit/055d8daa464c47f90caf7015a26d2c9892d981e8), closes [#1](https://github.com/twada/japanese-numerals-to-number/issues/1))
+
+
 ### [1.0.1](https://github.com/twada/japanese-numerals-to-number/releases/tag/v1.0.1) (2017-03-29)
 
 
