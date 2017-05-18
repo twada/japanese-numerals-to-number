@@ -91,11 +91,22 @@ describe('japanese-numerals-to-number', function () {
           }, /Wrong sequence of numerals/);
         });
       }
-      wrongSequence('十十');
-      wrongSequence('二十五十');
       wrongSequence('十百千');
       wrongSequence('三十七百九千');
       wrongSequence('四万三億二兆');
+    });
+    describe('throws Error when name of powers of 10 appears more than once in subsequence', function () {
+      function wrongSequence (input) {
+        it(input, function () {
+          assert.throws(function () {
+            japaneseNumeralsToNumber(input);
+          }, /appears more than once in subsequence/);
+        });
+      }
+      wrongSequence('十十');
+      wrongSequence('二十五十');
+      wrongSequence('三十二十');
+      wrongSequence('八百五百');
     });
     describe('"一百" and "一十" are invalid in common writing. 100 is just "百", and 10 is just "十"', function () {
       function explicitIchi (input) {

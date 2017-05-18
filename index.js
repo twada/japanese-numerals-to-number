@@ -63,7 +63,10 @@ function valuesOf (acc) {
 function subseqToNumbers (subseq) {
   return valuesOf(subseq.reduce(function (prev, char) {
     if (PLACES_IN_SUBSEQ[char]) {
-      return {values: valuesOf(prev), seq: [], exp: PLACES_IN_SUBSEQ[char], place: char};
+      if (prev.places.indexOf(char) !== -1) {
+        throw new Error(char + ' appears more than once in subsequence');
+      }
+      return {values: valuesOf(prev), seq: [], exp: PLACES_IN_SUBSEQ[char], place: char, places: prev.places.concat(char)};
     }
     // in some cases, the digit 1 is explicitly written like 壱百壱拾 for 110, as opposed to 百十 in common writing.
     if (char === '一' && (prev.place === '十' || prev.place === '百')) {
@@ -73,9 +76,10 @@ function subseqToNumbers (subseq) {
       values: prev.values,
       seq: prev.seq.concat(JAPANESE_NUMERAL_CHARS[char] * Math.pow(10, prev.exp)),
       exp: prev.exp + 1,
-      place: prev.place
+      place: prev.place,
+      places: prev.places
     };
-  }, {values: [], seq: [], exp: 0, place: '一'}));
+  }, {values: [], seq: [], exp: 0, place: '一', places: ['一']}));
 }
 
 function carryUpAndConcatSubseq (acc) {
