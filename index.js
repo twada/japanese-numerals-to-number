@@ -10,34 +10,34 @@
 'use strict';
 
 var JAPANESE_NUMERAL_CHARS = {
-  '〇': 0,
-  '一': 1,
-  '二': 2,
-  '三': 3,
-  '四': 4,
-  '五': 5,
-  '六': 6,
-  '七': 7,
-  '八': 8,
-  '九': 9,
+  〇: 0,
+  一: 1,
+  二: 2,
+  三: 3,
+  四: 4,
+  五: 5,
+  六: 6,
+  七: 7,
+  八: 8,
+  九: 9,
   // formal numerals (daiji) used in legal documents
-  '壱': 1,
-  '弐': 2,
-  '参': 3
+  壱: 1,
+  弐: 2,
+  参: 3
 };
 
 var PLACES_IN_SUBSEQ = {
-  '十': 1,
-  '百': 2,
-  '千': 3,
+  十: 1,
+  百: 2,
+  千: 3,
   // formal numerals (daiji) used in legal documents
-  '拾': 1
+  拾: 1
 };
 
 var POWERS_OF_MYRIAD = {
-  '万': 4,
-  '億': 8,
-  '兆': 12
+  万: 4,
+  億: 8,
+  兆: 12
 };
 
 function valuesOf (acc) {
@@ -66,7 +66,7 @@ function subseqToNumbers (subseq) {
       if (prev.places.indexOf(char) !== -1) {
         throw new Error(char + ' appears more than once in subsequence');
       }
-      return {values: valuesOf(prev), seq: [], exp: PLACES_IN_SUBSEQ[char], place: char, places: prev.places.concat(char)};
+      return { values: valuesOf(prev), seq: [], exp: PLACES_IN_SUBSEQ[char], place: char, places: prev.places.concat(char) };
     }
     // in some cases, the digit 1 is explicitly written like 壱百壱拾 for 110, as opposed to 百十 in common writing.
     if (char === '一' && (prev.place === '十' || prev.place === '百')) {
@@ -79,7 +79,7 @@ function subseqToNumbers (subseq) {
       place: prev.place,
       places: prev.places
     };
-  }, {values: [], seq: [], exp: 0, place: '一', places: ['一']}));
+  }, { values: [], seq: [], exp: 0, place: '一', places: ['一'] }));
 }
 
 function carryUpAndConcatSubseq (acc) {
@@ -98,10 +98,10 @@ function carryUpAndConcatSubseq (acc) {
 function charsToNumbers (chars) {
   return carryUpAndConcatSubseq(chars.reverse().reduce(function (prev, char) {
     if (POWERS_OF_MYRIAD[char]) {
-      return {values: carryUpAndConcatSubseq(prev), exp: POWERS_OF_MYRIAD[char], seq: []};
+      return { values: carryUpAndConcatSubseq(prev), exp: POWERS_OF_MYRIAD[char], seq: [] };
     }
-    return {values: prev.values, exp: prev.exp, seq: prev.seq.concat([char])};
-  }, {values: [], exp: 0, seq: []}));
+    return { values: prev.values, exp: prev.exp, seq: prev.seq.concat([char]) };
+  }, { values: [], exp: 0, seq: [] }));
 }
 
 function charsToNumber (chars) {
