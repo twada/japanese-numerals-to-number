@@ -3,7 +3,7 @@
  *
  * https://github.com/twada/japanese-numerals-to-number
  *
- * Copyright (c) 2017-2020 Takuto Wada
+ * Copyright (c) 2017-2021 Takuto Wada
  * Licensed under the MIT license.
  *   https://github.com/twada/japanese-numerals-to-number/blob/master/LICENSE
  */
