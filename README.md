@@ -3,7 +3,7 @@ japanese-numerals-to-number
 
 Converts [Japanese Numerals](https://en.wikipedia.org/wiki/Japanese_numerals) into `number`.
 
-[![Build Status][travis-image]][travis-url]
+[![Build Status][ci-image]][ci-url]
 [![NPM version][npm-image]][npm-url]
 [![Code Style][style-image]][style-url]
 [![License][license-image]][license-url]
@@ -76,8 +76,8 @@ Licensed under the [MIT](https://github.com/twada/japanese-numerals-to-number/bl
 [npm-url]: https://npmjs.org/package/japanese-numerals-to-number
 [npm-image]: https://badge.fury.io/js/japanese-numerals-to-number.svg
 
-[travis-url]: https://travis-ci.org/twada/japanese-numerals-to-number
-[travis-image]: https://secure.travis-ci.org/twada/japanese-numerals-to-number.svg?branch=master
+[ci-image]: https://github.com/twada/japanese-numerals-to-number/workflows/Node.js%20CI/badge.svg
+[ci-url]: https://github.com/twada/japanese-numerals-to-number/actions?query=workflow%3A%22Node.js+CI%22
 
 [style-url]: https://github.com/Flet/semistandard
 [style-image]: https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg
