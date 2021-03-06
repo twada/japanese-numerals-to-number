@@ -1,12 +1,12 @@
 'use strict';
 
 delete require.cache[require.resolve('..')];
-var japaneseNumeralsToNumber = require('..');
-var assert = require('assert');
+const japaneseNumeralsToNumber = require('..');
+const assert = require('assert');
 
 function testConv (spec) {
-  var input = spec.input;
-  var expected = spec.expected;
+  const input = spec.input;
+  const expected = spec.expected;
   it('input: ' + input + ', expected: ' + expected, function () {
     assert(japaneseNumeralsToNumber(input) === expected);
   });

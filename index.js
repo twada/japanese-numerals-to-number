@@ -9,7 +9,7 @@
  */
 'use strict';
 
-var JAPANESE_NUMERAL_CHARS = {
+const JAPANESE_NUMERAL_CHARS = {
   〇: 0,
   一: 1,
   二: 2,
@@ -26,7 +26,7 @@ var JAPANESE_NUMERAL_CHARS = {
   参: 3
 };
 
-var PLACES_IN_SUBSEQ = {
+const PLACES_IN_SUBSEQ = {
   十: 1,
   百: 2,
   千: 3,
@@ -34,14 +34,14 @@ var PLACES_IN_SUBSEQ = {
   拾: 1
 };
 
-var POWERS_OF_MYRIAD = {
+const POWERS_OF_MYRIAD = {
   万: 4,
   億: 8,
   兆: 12
 };
 
 function valuesOf (acc) {
-  var exp = PLACES_IN_SUBSEQ[acc.place];
+  const exp = PLACES_IN_SUBSEQ[acc.place];
   if (!exp) {
     // positional notation or place of '一'
     if ((acc.seq.length > 0) && (acc.seq[acc.seq.length - 1] === 0)) {
@@ -50,7 +50,7 @@ function valuesOf (acc) {
     return acc.values.concat(acc.seq);
   }
   // if seq starts with 十,百,千, treat them as 一十,一百,一千
-  var seqForPlace = (acc.seq.length === 0) ? acc.seq.concat(1 * Math.pow(10, exp)) : acc.seq;
+  const seqForPlace = (acc.seq.length === 0) ? acc.seq.concat(1 * Math.pow(10, exp)) : acc.seq;
   if (seqForPlace.length !== 1) {
     throw new Error('Each place (' + Object.keys(PLACES_IN_SUBSEQ).join(',') + ') should not have more than one digit');
   }
@@ -91,7 +91,7 @@ function carryUpAndConcatSubseq (acc) {
       throw new Error('if "千" directly precedes the name of powers of myriad, "一" is normally attached before "千"');
     }
   }
-  var numseq = subseqToNumbers(acc.seq).map(function (n) { return n * Math.pow(10, acc.exp); });
+  const numseq = subseqToNumbers(acc.seq).map(function (n) { return n * Math.pow(10, acc.exp); });
   return acc.values.concat(numseq);
 }
 
@@ -141,7 +141,7 @@ function japaneseNumeralsToNumber (japaneseNumerals) {
   if (japaneseNumerals.length > 32) {
     throw new Error('length of japaneseNumerals is too long');
   }
-  var pattern = new RegExp('^[' + supportedCharacters().join('') + ']+$');
+  const pattern = new RegExp('^[' + supportedCharacters().join('') + ']+$');
   if (!pattern.test(japaneseNumerals)) {
     throw new Error('japaneseNumerals argument does not match ' + pattern);
   }
